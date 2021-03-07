@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Amicable Numbers</title>
+    <style type="text/css">
+      * {
+        background-color: #e8e8e4;
+        text-align: center; 
+      }
+      
+    </style>  
+    <script language="javascript">   
+      
+      //display the result
+      window.onload = function(){
+
+        b = document.getElementById("btn1");
+        b.onclick = function() {
+          first = parseInt(document.getElementById("first").value);
+          second = parseInt(document.getElementById("second").value);
+          result = "The numbers " + first +  " and " + second 
+          if(ifAmicable(first, second)) {
+            result += " are amicable. :)"
+          } else {
+            result += " are not amicable. :("
+          }
+          showNum();
+          document.getElementById("result").innerHTML = result;
+        };
+        
+      }
+      
+  
+    //get two values from the user; use a form with two input boxes and a button
+    function showNum(){
+        first = parseInt(document.getElementById("first").value);
+        second = parseInt(document.getElementById("second").value);
+        alert("the first number is " + first);
+        alert("the second number is " + second);
+    }
+    
+    //create a pop up to display the factors
+    //find the divisors of the number and store them in array
+    function findDivs(number){
+        //generate the array 
+        var divisors = number => Array
+        //populate the empty array with values according to the pos
+        .from(Array(number + 1), (_, i) => i)
+        //leaves only the factors of the number
+        .filter(i => number % i == 0)
+        // alert(divisors(number));
+        return divisors(number);
+    } 
+    
+    // check if the two numbers are amicable
+    function ifAmicable(x,y){
+        var divX = new findDivs(x);
+        var divY = new findDivs(y);
+        
+        sumX = 0;
+        sumY = 0;
+        // alert("divX is " + divX + " " + divY);
+        for (var i = 0; i < divX.length; i++){
+            sumX += divX[i];
+        }
+        for (var i = 0; i < divY.length; i++){
+            sumY += divY[i];
+        }
+        sumX -= x;
+        sumY -= y;
+        if (sumX == y && sumY == x){
+            // alert("yes");
+            return true;
+        } else {
+          // alert("no");
+          return false;
+        }
+    }
+      
+       
+    </script> 
+  </head>  
+  
+  
+  <body>  
+    <h1> Amicable Numbers and Where to Find Them</h1> 
+    
+    <form id="form">
+      Enter your first number: <input type="text" id="first"><br/>
+      <br/>
+      Enter your second number: <input type="text" id="second"><br/>
+      <br/>
+      <br/>
+      <div id="result"></div>
+      <input type= "button" value = "show the result" id="btn1">
+      
+      <br/>
+      
+    </form>
+    
+  </body>
+</html>
